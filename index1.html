@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEND A MASSEGE</title>
+</head>
+<style>
+    body{
+        text-align: center;
+        background-color: rgb(0, 0, 0);
+        color: aliceblue;
+        font-size: 32px;
+        animation: my 5s alternate infinite 0s linear;
+    }
+    @keyframes my{
+        0%{
+            color: rgb(255, 0, 0); 
+        }
+        10%{
+            color: rgb(255, 208, 0); 
+        }
+        30%{
+            color: rgb(81, 255, 1);
+        }
+        40%{
+            color: rgb(0, 255, 234);
+        }
+        50%{
+            color: rgb(0, 102, 255);
+        }
+        60%{
+            color: rgb(195, 0, 255);
+        }
+        70%{
+            color: rgb(255, 145, 0);
+        }
+        80%{
+            color: rgb(0, 0, 0);
+        }
+    }
+    input{
+        height: 50px;
+        width: 220px;
+        border-radius: 10px;
+    }
+    button{
+        height: 50px;
+        width: 90px;
+        border-radius: 10px;
+        font-size: 32px;
+        background-color: black;
+        color: aliceblue;
+        border: 4px solid white;
+    }
+    button:hover{
+        height: 50px;
+        width: 90px;
+        border-radius: 10px;
+        font-size: 39px;
+        background-color: rgb(21, 255, 0);
+        color: aliceblue;
+        border: 4px solid rgb(0, 0, 0);
+        box-shadow: 10px 10px 9px rgb(0, 255, 0);
+        
+    }
+    button:active{
+        height: 50px;
+        width: 90px;
+        border-radius: 10px;
+        font-size: 32px;
+        background-color: rgb(132, 0, 255);
+        color: aliceblue;
+        border: 4px solid rgb(0, 0, 0);
+        box-shadow: 10px 10px 9px rgb(119, 0, 255);
+    }
+</style>
+<body>
+    <h2>Send Message </h2>
+    <!-- Input text bar to type the message -->
+    <input type="text" id="message" placeholder="Enter your message here">
+    <!-- Button to trigger the sendMessage function -->
+    <button onclick="sendMessage()">🚀</button>
+
+    <script>
+        // Function to send the message to Telegram
+        function sendMessage() {
+            // Get the value from the input text bar
+            var message = document.getElementById('message').value;
+
+            // Replace with your chat ID or group/channel ID
+            var chatId = '5392701675';  // Use your numeric chat ID (not the username)
+
+            // Replace with your Telegram bot token
+            var botToken = '7530403881:AAE7a17kxByEkrMimb9_G1Qto2CU_iLIjkQ';
+
+            // Construct the Telegram API URL with the bot token, chat ID, and the message
+            var url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+            // Send a request to the Telegram API
+            fetch(url)
+            .then(response => response.json()) // Parse the response as JSON
+            .then(data => {
+                // If the message is sent successfully, show an alert
+                if (data.ok) {
+                    alert("Message sent successfully!");
+                } else {
+                    // If there's an error, show an error message
+                    alert("Error sending message: " + data.description);
+                }
+            })
+            .catch(error => {
+                // Handle any errors that occur during the request
+                console.error('Error:', error);
+                alert("Failed to send message.");
+            });
+        }
+    </script>
+</body>
+</html>
